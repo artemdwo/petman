@@ -1,0 +1,28 @@
+{
+  "name": "petman",
+  "version": "0.0.1",
+  "description": "Petstore testing suite",
+  "author": "Artem Dvornichenko",
+  "license": "MIT",
+  "engines": {
+    "node": ">=11.0.0"
+  },
+  "scripts": {
+    "test": "cucumber-js --format=node_modules/cucumber-pretty",
+    "test:wip": "cucumber-js --tags @wip --format=node_modules/cucumber-pretty",
+    "eslint": "eslint.js features/*/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/artemdwo/petman.git"
+  },
+  "devDependencies": {
+    "eslint": "^5.15.0",
+    "eslint-plugin-import": "^2.16.0"
+  },
+  "dependencies": {
+    "cucumber": "^5.1.0",
+    "cucumber-pretty": "^1.5.0",
+    "supertest": "^3.4.2"
+  }
+}
