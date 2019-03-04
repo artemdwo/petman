@@ -1,0 +1,12 @@
+{
+	"id": 909090,
+	"category": {
+		"id": 909090,
+		"name": "awesome"
+	},
+	"tags": [{
+		"id": 909090,
+		"name": "cute"
+	}],
+	"status": "available"
+}

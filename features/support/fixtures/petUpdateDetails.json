@@ -1,0 +1,14 @@
+{
+	"id": 909090,
+	"category": {
+		"id": 909091,
+		"name": "new awesome"
+	},
+	"name": "new param-pam-pam",
+	"photoUrls": ["http://some.test.photo/url"],
+	"tags": [{
+		"id": 909091,
+		"name": "new cute"
+	}],
+	"status": "not available anymore"
+}
