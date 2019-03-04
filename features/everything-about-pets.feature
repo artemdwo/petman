@@ -9,15 +9,15 @@ Feature: Pets' management service
       Then  Confirm the status code is 200
       And   I ensure the data stored is correct as "petDetails"
 
-    Scenario: Add a new pet to the store database - unsuccessful - no required fields
+    Scenario Outline: Add a new pet to the store database - unsuccessful
       Given The service is available
-      When  I add a pet to the database with "petDetailsInvalid"
-      Then  Confirm the status code is 405
+      When  I add a pet to the database with "<fixture>"
+      Then  Confirm the status code is <code>
 
-    Scenario: Add a new pet to the store database - unsuccessful - empty request body
-      Given The service is available
-      When  I add a pet to the database with "petDetailsEmpty"
-      Then  Confirm the status code is 405
+      Examples:
+      |fixture            |code |
+      |petDetailsInvalid  |405  |
+      |petDetailsEmpty    |405  |
 
     Scenario: Update a pet in the store database - successful
       Given The service is available
@@ -25,15 +25,15 @@ Feature: Pets' management service
       Then  Confirm the status code is 200
       And   I ensure the data stored is correct as "petUpdateDetails"
     
-    Scenario: Update a pet in the store database - unsuccessful - invalid ID & no required fields
+    Scenario Outline: Update a pet in the store database - unsuccessful
       Given The service is available
-      When  I update a pet in the database with "petUpdateDetailsInvalid"
-      Then  Confirm the status code is 400
+      When  I update a pet in the database with "<fixture>"
+      Then  Confirm the status code is <code>
 
-    Scenario: Update a pet in the store database - unsuccessful - empty request body
-      Given The service is available
-      When  I update a pet in the database with "petDetailsEmpty"
-      Then  Confirm the status code is 400
+      Examples:
+      |fixture            |code |
+      |petDetailsInvalid  |400  |
+      |petDetailsEmpty    |400  |
 
     Scenario Outline: Search for a pet by ID in the store database
       Given The service is available
@@ -46,7 +46,7 @@ Feature: Pets' management service
       | 909090  | 200  | petUpdateDetails |
       | 090909  | 404  | petNotFound      |
 
-    Scenario Outline: Search for a pet by STATUS in the store database
+    Scenario: Search for a pet by STATUS in the store database
       Given The service is available
       When  I search for a pet in the database by "status" using "not available anymore"
       Then  Confirm the status code is 200
