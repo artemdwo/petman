@@ -8,11 +8,11 @@ const PET = {
     method: 'PUT'
   },
   fingByStatus: {
-    path: '/pet/findByStatus?status=$status$',
+    path: '/pet/findByStatus',
     method: 'GET'
   },
   findById: {
-    path: '/pet/$id$',
+    path: '/pet',
     method: 'GET'
   },
   formUpdateById: {

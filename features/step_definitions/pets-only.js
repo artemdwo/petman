@@ -75,13 +75,58 @@ When(/^I (add|update|delete) a pet (to|in|from) the database with "([a-zA-Z\d\s]
   }
 })
 
-Then(/^I ensure the data stored is correct$/, (done) => {
-  let expected = fixture.get(globExpected)
-  expect(JSON.stringify(globResponse)).to.be.equal(JSON.stringify(expected))
+Then(/^I ensure the data (stored|retrieved) is (correct as|similar to) "([a-zA-Z\d\s]+)"$/, (data_type, action, name, done) => {
+  let expected 
+  
+  switch(action){
+  case 'correct as':
+    expected = fixture.get(globExpected)
+
+    expect(JSON.stringify(globResponse)).to.be.equal(JSON.stringify(expected))
+    break
+  case 'similar to':
+    expected = fixture.get(name)
+
+    expect(JSON.stringify(globResponse)).to.include(JSON.stringify(expected))
+    break
+  default:
+    throw new Error(action + 'is not supported... yet')
+  }
+  
   done()
 })
 
-Then(/^Confirm the status code is "(\d+)"$/, (statusCode, done) => {
+Then('Confirm the status code is {int}', (statusCode, done) => {
   expect(globResponseStatus).to.be.equal(parseInt(statusCode))
   done()
+})
+
+When(/^I search for a pet in the database by "(id|status)" using "(\d+|[a-zA-Z\d\s]+)"$/, (by_type, term, done) => {
+  
+  const url = baseUrl + '/' + version
+
+  switch (by_type){
+  case 'id':
+    client.run(pet.findById.method, url, pet.findById.path + '/' + term, headers).then((res, err) => {
+      if (!err) {
+        globResponseStatus = res.status
+        globResponse = res.body
+        done()
+      } else {
+        done(err)
+      }
+    })
+    break
+  case 'status':
+    client.run(pet.fingByStatus.method, url, pet.fingByStatus.path, headers, null, { status: term }).then((res, err) => {
+      if (!err) {
+        globResponseStatus = res.status
+        globResponse = res.body
+        done()
+      } else {
+        done(err)
+      }
+    })
+    break
+  }
 })

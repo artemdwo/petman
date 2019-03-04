@@ -1,9 +1,9 @@
 const client = require('supertest')
 
-function run(method, baseUrl, endpoint, headers = {}, body = {}){
+function run(method, baseUrl, endpoint, headers = {}, body = {}, params = {}){
   switch(method){
   case 'GET':
-    return get(baseUrl, endpoint, headers)
+    return get(baseUrl, endpoint, headers, params)
   case 'PUT':
     return put(baseUrl, endpoint, headers, body)
   case 'DELETE':
@@ -15,9 +15,10 @@ function run(method, baseUrl, endpoint, headers = {}, body = {}){
   }
 }
 
-function get(baseUrl, path, headers){
+function get(baseUrl, path, headers, params){
   return client(baseUrl)
     .get(path)
+    .query(params)
     .set(headers)
 }
 
