@@ -1,8 +1,42 @@
 # petman
 Petstore testing suite
 
-## Prerequisites (must-have's)
+## Scope
+Scenarios provided to test functionality of actions:
+* **add a pet**: `POST` : `/pet`
+* **update pet details**: `PUT` : `/pet`
+* **find a pet by status**: `GET` : `/pet/findByStatus`
+* **find a pet by id**: `GET` : `/pet`
+
+## Prerequisites
 * Node 11
+
+## Components
+**Runner** - cucumber-js
+
+**HTTP Client** - supertest
+
+**Assertion library** - chai-js
+
+## Structure
+```bash
+./
+  features/
+      step_definitions/
+          *.js
+      support/
+            enum/
+                *.js
+            fixtures/
+                *.json
+            utils/
+                *.js
+      *.feature
+  .gitignore
+  package.json
+  README.md
+  DETAILS.md
+```
 
 ## Install
 1. clone the repository from https://github.com/artemdwo/petman.git
